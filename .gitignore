@@ -1,0 +1,13 @@
+.venv/
+__pycache__/
+*.pyc
+build/
+dist/
+.gradle/
+local.properties
+*.jks
+*.keystore
+*.bin
+*.vault
+!android/app/src/test/resources/desktop.vault
+.DS_Store
