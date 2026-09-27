@@ -1,0 +1,462 @@
+
+  <html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta content='Independent JPEG Group License and BSD 3-Clause "New" or "Revised" License' name="description"/>
+  <title>LibJPEG-turbo, version 3.2.0 | Qt GUI | Qt 6.11.2</title>
+  <link rel="stylesheet" type="text/css" href="/style/online2.css" />
+  <link rel="stylesheet" href="https://www.qt.io/hubfs/qt-design-system/qt-design-system-1.1.0.css" />
+  <link rel="stylesheet" type="text/css" href="/style/font-awesome.min.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.17/themes/default/style.min.css" />
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.17/themes/default-dark/style.min.css" />
+  <link href="images/htmltabs.css" rel="stylesheet" type="text/css"/>
+  <link rel="shortcut icon" href="//d33sqmjvzgs8hq.cloudfront.net/wp-content/themes/oneqt/assets/images/favicon.ico.gzip" />
+  <link rel="icon" type="image/png" href="//d33sqmjvzgs8hq.cloudfront.net/wp-content/themes/oneqt/assets/images/favicon-32x32.png" />
+  <link rel="icon" type="image/png" href="//d33sqmjvzgs8hq.cloudfront.net/wp-content/themes/oneqt/assets/images/favicon-16x16.png" />
+  <script type="text/javascript" src="//d33sqmjvzgs8hq.cloudfront.net/wp-includes/js/jquery/jquery.js.gzip"></script>
+  <script type="text/javascript" src="//d33sqmjvzgs8hq.cloudfront.net/wp-includes/js/jquery/jquery-migrate.min.js.gzip"></script>
+  <script type="text/javascript" src="//d33sqmjvzgs8hq.cloudfront.net/wp-content/themes/oneqt/js/combo.js.gzip"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jstree/3.3.17/jstree.min.js"></script>
+  <script type="text/javascript" src="/scripts/popper.min.js"></script>
+  <script type="text/javascript" src="/scripts/tippy.min.js"></script>
+  <script type="text/javascript" src="/scripts/qtds-extras.js"></script>
+  <script type="text/javascript"> wpThemeFolder = 'https://qt.io/wp-content/themes/oneqt'; </script>
+  <script type="text/javascript">
+ $(document).ready(function(){
+   $("input[type=radio]").on("click", function() {
+   var lbl = $(this).next().text();
+   $("input[type=radio]:not(checked)").filter(function() {
+     if ($(this).next().text() == lbl)
+         $(this).prop("checked", true);
+   });
+   });
+ });
+  </script>
+  <script type="text/javascript">
+    $(function () {
+      if (document.documentElement.getAttribute('data-theme') === 'dark')
+        $('input#th-toggle').prop('checked', true);
+      $('input#th-toggle').change(function() {
+        var theme = this.checked ? 'dark' : 'light';
+        localStorage.setItem('theme', theme);
+        document.documentElement.setAttribute('data-theme', theme);
+        $('#sidebar-toctree').jstree(true).set_theme('default' + `${theme === 'dark' ? '-dark' : ''}`);
+      });
+    });
+  </script>
+  <script type="text/javascript" src="/scripts/init-tree.js"></script>
+  <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5QQXBTC');</script>
+  <!-- End Google Tag Manager -->
+  <script type="text/javascript" src="/scripts/qt-design-system-1.1.0-doc.js"></script>
+</head>
+<body class="qt-design-system" style="background:var(--content-bg-color)" >
+<div class="qds-page-header" id="qds-page-header">
+<header class="b-header" data-float="true">
+    <div class="b-header__container">
+
+        <div class="b-header__secondary-level">
+            <div class="b-header__secondary-level__back">
+                <a class="c-link c-link--left" href="https://www.qt.io/">Back to Qt.io</a>
+            </div>
+            <div class="b-header__secondary-level__right">
+                <a href="https://www.qt.io/contact-us/" target="_blank">Contact Us</a>
+                <a href="https://blog.qt.io/" target="_blank">Blog</a>
+                <a href="https://www.qt.io/download/" target="_blank" class="c-button c-button--small">Download Q&#116;</a>
+            </div>
+        </div>
+
+        <div class="b-header__primary-level">
+            <div class="b-header__primary-level__left">
+                <a class="b-header__logo" href="/">
+                    <img src="/style/qt-logo-documentation.png" srcset="/style/qt-logo-documentation.png 1x, /style/qt-logo-documentation-2x.png 2x" alt="Qt documentation">
+                </a>
+            </div>
+            <div class="b-header__primary-level__navigation">
+            <ul class="c-navigation-header">
+                <li id="qds-trans" role="menu" class="has-children" style="display: none; margin: 0 20px 5px 0;top:7px">
+                <div class="lang-icon theme-icon"><a></a></div>
+                    <ul id="qds-trans-ul">
+                        <li class="tr-lang active" data-lang="en"><a>English</a></li>
+                    </ul>
+                </li>
+                <li role="menu" style="margin: 0 5px 5px 0;top:7px">
+                  <div title="Toggle light/dark theme" class="theme-switch-wrapper">
+                    <label class="theme-switch" for="th-toggle">
+                        <input type="checkbox" id="th-toggle" />
+                        <div class="theme-icon"></div>
+                    </label>
+                  </div>
+                </li>
+                <li role="menu">
+                    <a href="https://www.qt.io/academy" aria-haspopup="true" aria-expanded="false">Qt Academy</a>
+                </li>
+                <li role="menu">
+                    <a href="/archives" aria-haspopup="true" aria-expanded="false">Archives</a>
+                </li>
+                <li role="menu">
+                    <a href="https://doc-snapshots.qt.io/" aria-haspopup="true" aria-expanded="false">Snapshots</a>
+                </li>
+            </ul>
+            </div>
+            <div class="b-header__primary-level__hamburger">
+                <div class="c-hamburger"></div>
+            </div>
+        </div>
+    </div>
+</header>
+</div>
+<div data-global-resource-path="qt-design-system/components/b-sidebar.html">
+    <div class="b-sidebar b-sidebar--full-width">
+        <aside class="b-sidebar__sidebar">
+            <div id="qds-sbhandle"></div>
+            <div class="b-sidebar__sidebar__mobile-close"><div class="c-mobile-close"></div></div>
+            <div class="b-sidebar__sidebar__mobile-toggle" data-mobile-title="Topics"></div>
+                        <div class="b-sidebar__sidebar__content">
+                <div data-margin-bottom="md">
+                                        <select id="qds-vdropdown" class="c-form-select c-form-select--dark js-versioncontrol" style="visibility:hidden">
+                                            </select>
+                                    </div>
+                <div id="qds-ec-toggle" title="Expand/collapse all"></div>
+                <nav>
+                    <div id="sidebar-toctree"></div>
+                    <ul class="c-sidebar-navigation">
+                                                
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+        <div class="b-sidebar__content">
+            <div class="b-sidebar__topbar" data-margin-bottom="sm">
+                <div class="b-topbar">
+                    <div class="b-topbar__search">
+                        <form id="site-search" role="search" style="width: 535px; max-width: 100%" autocomplete="off">
+                            <input accesskey="f" class="c-form-input-field c-form-input-field--search" placeholder="Search" id="search" name="search" onclick="(function(w,d,i){i.removeAttribute('on'+w.event.type);var j=d.createElement('script'),c=d.createElement('link');j.async=true;j.onload=function(){qtSearchInit(i,w.qtSearchNavigation)};j.src='//www.qt.io/hubfs/qt-design-system/qt-search-component-v2/qt-search-component-v2.js';c.rel='stylesheet';c.onload=function(){try{w.qtscs=1;qtSearchStyle(i)}catch(e){}};c.href='//www.qt.io/hubfs/qt-design-system/qt-search-component-v2/qt-search-component-v2.css';d.head.appendChild(c);d.head.appendChild(j)})(window,document,this)" required type="text">
+                            <button type="submit" style="display:none;">Search</button>
+                            <style>.js-qt-search-component{z-index:1000;}</style>
+                        </form>
+                    </div>                    <div class="b-topbar__breadcrump" translate="no">
+                        <ul class="c-breadcrump">
+                            <li><a href="index.html">Qt 6.11</a></li>
+                            <li><a href="qtgui-index.html">Qt GUI</a></li>
+                            <li><a>LibJPEG-turbo, version 3.2.0</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="b-sidebar__content__wrapper">
+                <article class="b-sidebar__content__left">
+                    <div class="context mainContent" style="margin: 0;padding: 0; background: 0;">
+                    
+
+<div class="context">
+<h1 class="title">LibJPEG-turbo, version 3.2.0</h1>
+<!-- $$$qtgui-attribution-libjpeg.html-description -->
+<div class="descr" id="details">
+<span id="libjpeg"></span><p>The Independent JPEG Group's JPEG software</p>
+<p>Used in the qjpeg image plugin. Configure with -system-libjpeg or -no-libjpeg to avoid.</p>
+<p>The sources can be found in qtbase/src/3rdparty/libjpeg.</p>
+<p><a href="http://libjpeg-turbo.virtualgl.org/">Project Homepage</a>, upstream version: <a href="https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/3.2.0/libjpeg-turbo-3.2.0.tar.gz">3.2.0</a></p>
+<div class="pre"><pre class="cpp plain" translate="no">Copyright (C) 2009-2026 D. R. Commander
+Copyright (C) 1991-1998 Thomas G. Lane
+Copyright (C) 2009 Pierre Ossman for Cendio AB
+Copyright (C) 1999-2006 MIYASAKA Masaru
+Copyright (C) 1999 Ken Murchison
+Copyright (C) 2015-2016, 2018, 2022 Matthieu Darbois
+Copyright (C) 2018 Matthias Räncker
+Copyright (C) 2019-2020 Arm Limited
+Copyright (C) 2022 Felix Hanau
+Copyright (C) 1997-1998 Thomas G. Lane, Todd Newman
+Copyright (C) 2021 Alex Richardson
+Copyright (C) 2015, 2020 Google, Inc.
+Copyright (C) 2013 Linaro Limited
+Copyright (C) 2014 Olle Liljenzin
+Copyright (C) 1991-2020 Thomas G. Lane, Guido Vollbeding</pre></div>
+<p>Independent JPEG Group License and BSD 3-Clause "New" or "Revised" License.</p>
+<div class="pre"><pre class="cpp plain" translate="no">libjpeg-turbo Licenses
+======================
+
+libjpeg-turbo is covered by two compatible BSD-style open source licenses:
+
+- The IJG (Independent JPEG Group) License, which is listed in
+  [README.ijg](README.ijg)
+
+  This license applies to the libjpeg API library and associated programs,
+  including any code inherited from libjpeg and any modifications to that
+  code.
+
+- The Modified (3-clause) BSD License, which is listed below
+
+  This license applies to the TurboJPEG API library and associated programs,
+  [libspng](https://libspng.org) (which is used by cjpeg and djpeg), and the
+  build/test system.
+
+  * The TurboJPEG API library wraps the libjpeg API library, so in the context
+    of the overall TurboJPEG API library, both the terms of the IJG License and
+    the terms of the Modified (3-clause) BSD License apply.
+  * cjpeg and djpeg use libspng, so in the context of those programs, both the
+    terms of the IJG License and the terms of the Modified (3-clause) BSD
+    License apply.
+
+
+Component Licenses
+==================
+
+Some of libjpeg-turbo's modules and internal dependencies are covered by less
+restrictive licenses, but in the context of libjpeg-turbo as a whole, the terms
+of the less restrictive licenses are subsumed by either the IJG License or the
+Modified BSD License.  (In other words, the terms of the less restrictive
+licenses are satisfied if the terms of the IJG and Modified BSD Licenses are
+satisfied.)
+
+- The libjpeg-turbo SIMD source code and zlib are covered by the
+  [zlib License](https://spdx.org/licenses/Zlib.html), which is subsumed by the
+  IJG License in the context of the cjpeg and djpeg programs and the libjpeg
+  API library.
+
+- Some of the libspng source code is covered by the
+  [PNG Reference Library License v2](https://spdx.org/licenses/libpng-2.0.html),
+  which is subsumed by the IJG License in the context of the cjpeg and djpeg
+  programs and the TurboJPEG API library.
+
+- Most of the libspng source code is covered by the
+  [Simplified (2-clause) BSD License](https://spdx.org/licenses/BSD-2-Clause.html),
+  which is subsumed by the Modified BSD License in the context of the cjpeg and
+  djpeg programs and the TurboJPEG API library.
+
+
+Complying with the libjpeg-turbo Licenses
+=========================================
+
+This section provides a roll-up of the libjpeg-turbo licensing terms, to the
+best of our understanding.  This is not a license in and of itself.  It is
+intended solely for clarification.
+
+1.  If you are distributing a modified version of the libjpeg-turbo source,
+    then:
+
+    1.  You cannot alter or remove any existing copyright or license notices
+        from the source.
+
+        **Origin**
+        - Clause 1 of the IJG License
+        - Clause 1 of the Modified BSD License
+
+    2.  You must add your own copyright notice to the header of each source
+        file you modified, so others can tell that you modified that file.  (If
+        there is not an existing copyright header in that file, then you can
+        simply add a notice stating that you modified the file.)
+
+        **Origin**
+        - Clause 1 of the IJG License
+
+    3.  You must include the IJG README file, and you must not alter any of the
+        copyright or license text in that file.
+
+        **Origin**
+        - Clause 1 of the IJG License
+
+2.  If you are distributing only libjpeg-turbo binaries without the source, or
+    if you are distributing an application that statically links with
+    libjpeg-turbo, then:
+
+    1.  Your product documentation must include a message stating:
+
+        This software is based in part on the work of the Independent JPEG
+        Group.
+
+        **Origin**
+        - Clause 2 of the IJG license
+
+    2.  If your binary distribution includes or uses the TurboJPEG API or
+        associated programs, cjpeg, or djpeg, then your product documentation
+        must include the text of the Modified BSD License (see below.)
+
+        **Origin**
+        - Clause 2 of the Modified BSD License
+
+3.  You cannot use the name of the IJG or The libjpeg-turbo Project or the
+    contributors thereof in advertising, publicity, etc.
+
+    **Origin**
+    - IJG License
+    - Clause 3 of the Modified BSD License
+
+4.  The authors and distributors do not warrant libjpeg-turbo to be free of
+    defects, nor do we accept any liability for undesirable consequences
+    resulting from your use of the software.
+
+    **Origin**
+    - IJG License
+    - Modified BSD License
+
+
+The Modified (3-clause) BSD License
+===================================
+
+Copyright (C) 2009-2026 D. R. Commander&lt;br&gt;
+Copyright (C) 2018-2023 Randy &lt;randy408@protonmail.com&gt;
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+- Redistributions of source code must retain the above copyright notice,
+  this list of conditions and the following disclaimer.
+- Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+- Neither the name of the libjpeg-turbo Project nor the names of its
+  contributors may be used to endorse or promote products derived from this
+  software without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS",
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.</pre></div>
+<div class="pre"><pre class="cpp plain" translate="no">The authors make NO WARRANTY or representation, either express or implied,
+with respect to this software, its quality, accuracy, merchantability, or
+fitness for a particular purpose.  This software is provided "AS IS", and you,
+its user, assume the entire risk as to its quality and accuracy.
+
+This software is copyright (C) 1991-2020, Thomas G. Lane, Guido Vollbeding.
+All Rights Reserved except as specified below.
+
+Permission is hereby granted to use, copy, modify, and distribute this
+software (or portions thereof) for any purpose, without fee, subject to these
+conditions:
+(1) If any part of the source code for this software is distributed, then this
+README file must be included, with this copyright and no-warranty notice
+unaltered; and any additions, deletions, or changes to the original files
+must be clearly indicated in accompanying documentation.
+(2) If only executable code is distributed, then the accompanying
+documentation must state that "this software is based in part on the work of
+the Independent JPEG Group".
+(3) Permission for use of this software is granted only if the user accepts
+full responsibility for any undesirable consequences; the authors accept
+NO LIABILITY for damages of any kind.
+
+These conditions apply to any software derived from or based on the IJG code,
+not just to the unmodified library.  If you use our work, you ought to
+acknowledge us.
+
+Permission is NOT granted for the use of any IJG author's name or company name
+in advertising or publicity relating to this software or products derived from
+it.  This software may be referred to only as "the Independent JPEG Group's
+software".
+
+We specifically permit and encourage the use of this software as the basis of
+commercial products, provided that all warranty or liability claims are
+assumed by the product vendor.</pre></div>
+</div>
+<!-- @@@qtgui-attribution-libjpeg.html -->
+</div>
+<p class="copy-notice">
+<abbr title="Copyright">©</abbr> 2026 The Qt Company Ltd.
+   Documentation contributions included herein are the copyrights of
+   their respective owners.     The documentation provided herein is licensed under the terms of the    <a href="http://www.gnu.org/licenses/fdl.html">GNU Free Documentation    License version 1.3</a> as published by the Free Software Foundation.     Qt and respective logos are <a href="https://doc.qt.io/qt/trademarks.html">    trademarks</a> of The Qt Company Ltd. in Finland and/or other countries
+   worldwide. All other trademarks are property of their respective owners. </p>
+
+                    </div>
+                </article>
+                <aside class="b-sidebar__content__right">
+                    <div class="h-wysiwyg-html" data-scheme>
+                                            </div>
+                                    </aside>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="footer">
+<div class="l-footer">
+    <div class="l-footer__container">
+        <div class="l-footer__row l-footer__row--no-padding-bottom">
+            <div class="l-footer__column l-footer__company">
+                <div class="l-footer__logo">
+                    <a href="https://www.qt.io/?hsLang=en" class="c-logo-footer">
+                    <img src="/images/qtgroup.svg">
+                    </a>
+                </div>
+                <div class="c-social-media-links">
+                    <a href="https://twitter.com/qtproject" target="_blank" rel="noopener" class="fm_button fm_twitter"><span></span></a>
+                    <a href="https://www.facebook.com/qt/" target="_blank" rel="noopener" class="fm_button fm_facebook"><span></span></a>
+                    <a href="https://www.youtube.com/user/QtStudios" target="_blank" rel="noopener" class="fm_button fm_youtube"><span></span></a>
+                    <a href="https://www.linkedin.com/company/qtgroup/" target="_blank" rel="noopener" class="fm_button fm_linkedin"><span></span></a>
+                </div>
+                <div class="l-footer__contact">
+                        <a class="c-btn " href="https://www.qt.io/contact-us?hsLang=en">Contact Us</a>
+                </div>
+
+            </div>
+            <div class="l-footer__column l-footer__navigation">
+                <div class="c-footer-navigation">
+
+                        <span><div class="hs-menu-wrapper" role="navigation" aria-label="Navigation Menu">
+<ul role="menu">
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="none"><a href="javascript:;" aria-haspopup="true" aria-expanded="false" role="menuitem">Qt Group</a>
+   <ul role="menu" class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.qt.io/group" role="menuitem">Our Story</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.qt.io/brand" role="menuitem">Brand</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.qt.io/newsroom" role="menuitem">News</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.qt.io/careers" role="menuitem">Careers</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.qt.io/investors" role="menuitem">Investors</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.qt.io/product" role="menuitem">Qt Products</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.qt.io/product/quality-assurance" role="menuitem">Software Quality Products</a></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="none"><a href="javascript:;" aria-haspopup="true" aria-expanded="false" role="menuitem">Licensing</a>
+   <ul role="menu" class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.qt.io/terms-conditions" role="menuitem">License Agreement</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.qt.io/licensing/open-source-lgpl-obligations" role="menuitem">Open Source</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.qt.io/pricing" role="menuitem">Plans and pricing</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.qt.io/download" role="menuitem">Download</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.qt.io/faq/overview" role="menuitem">FAQ</a></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="none"><a href="javascript:;" aria-haspopup="true" aria-expanded="false" role="menuitem">Learn Qt</a>
+   <ul role="menu" class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.qt.io/academy" role="menuitem">For Learners</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.qt.io/qt-educational-license" role="menuitem">For Students and Teachers</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://doc.qt.io/" role="menuitem" target="_blank" rel="noopener">Qt Documentation</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://forum.qt.io/" role="menuitem" target="_blank" rel="noopener">Qt Forum</a></li>
+   </ul></li>
+  <li class="hs-menu-item hs-menu-depth-1 hs-item-has-children" role="none"><a href="javascript:;" aria-haspopup="true" aria-expanded="false" role="menuitem">Support &amp; Services</a>
+   <ul role="menu" class="hs-menu-children-wrapper">
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.qt.io/qt-professional-services" role="menuitem">Professional Services</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.qt.io/customer-success" role="menuitem">Customer Success</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.qt.io/qt-support/" role="menuitem">Support Services</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.qt.io/contact-us/partners" role="menuitem">Partners</a></li>
+    <li class="hs-menu-item hs-menu-depth-2" role="none"><a href="https://www.qt.io/qt-world" role="menuitem" target="_blank" rel="noopener">Qt World</a></li>
+   </ul></li>
+ </ul>
+</div></span>
+      </div>
+   </div>
+</div>
+        <div class="l-footer__row">
+            <div class="l-footer__column l-footer__legal">
+                <div class="c-footer-secondary-navigation">
+                    <span><div class="hs-menu-wrapper" role="navigation"  aria-label="Navigation Menu">
+ <ul role="menu">
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="javascript:;" role="menuitem">© 2026 The Qt Company</a></li>
+  <li class="hs-menu-item hs-menu-depth-1" role="none"><a href="mailto:feedback@qt.io?Subject=Feedback%20about%20doc.qt.io%20site">Feedback</a></li>
+ </ul>
+</div></span>
+                    <p class="c-footer-secondary-navigation__group-notice">Qt Group includes The Qt Company Oy and its global subsidiaries and affiliates.</p>
+                </div>
+            </div>
+            <div class="l-footer__column l-footer__some-links">
+            </div>
+        </div>
+    </div>
+</div>
+</div></body></html>
