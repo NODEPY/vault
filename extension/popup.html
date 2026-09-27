@@ -1,0 +1,8 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Vault</title><link rel="stylesheet" href="popup.css"></head><body>
+<header><strong>vault</strong><span id="status">Connecting…</span></header>
+<p id="site"></p><p id="message" role="status"></p>
+<button id="enable" hidden>Enable on this site</button>
+<section id="accounts" hidden><div class="heading"><h1>Accounts</h1><button id="refresh" class="quiet">Refresh</button></div><div id="entries"></div><button id="capture" class="quiet wide">Save current login form</button></section>
+<section id="pending" hidden><h2>Save this login?</h2><p id="username"></p><div class="row"><button id="save">Save to Vault</button><button id="discard" class="quiet">Discard</button></div></section>
+<footer>Unlock Vault on your computer.<br>Access is limited to this exact website.</footer>
+<script type="module" src="popup.js"></script></body></html>
