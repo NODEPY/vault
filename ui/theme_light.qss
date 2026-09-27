@@ -1,0 +1,30 @@
+
+QWidget { background-color: #f5f4fa; color: #242137; font-size: 15px; }
+QLabel#title { color: #6545b5; font-size: 28px; font-weight: bold; }
+QLabel#subtitle { color: #625d75; font-size: 14px; }
+QLabel#hint { color: #625d75; font-size: 12px; }
+QLabel#error { color: #ae203a; font-size: 13px; }
+QLineEdit, QListWidget, QComboBox {
+    background-color: #ffffff; border: 1px solid #d6d1e5; border-radius: 10px;
+    padding: 11px; selection-background-color: #e3dafa; selection-color: #242137;
+}
+QLineEdit:focus, QComboBox:focus { border: 1px solid #6545b5; }
+QComboBox { min-width: 160px; padding-right: 28px; }
+QComboBox::drop-down { border: none; width: 26px; }
+QComboBox QAbstractItemView { background-color: #ffffff; color: #242137; selection-background-color: #e3dafa; selection-color: #242137; padding: 5px; }
+QListWidget::item { padding: 14px; margin: 3px; border-radius: 8px; }
+QListWidget::item:hover { background-color: #ece7f8; }
+QListWidget::item:selected { background-color: #e3dafa; color: #242137; }
+QPushButton { background-color: #7154ce; color: #ffffff; border: 1px solid transparent; border-radius: 10px; padding: 11px 17px; font-weight: bold; }
+QPushButton:hover { background-color: #8062e2; }
+QPushButton:pressed { background-color: #6247b6; }
+QPushButton:focus { border: 1px solid #6545b5; }
+QPushButton#secondary { background-color: #ffffff; color: #242137; border: 1px solid #d6d1e5; }
+QPushButton#secondary:hover { background-color: #ece7f8; }
+QPushButton#danger { background-color: #bb3049; color: #ffffff; }
+QPushButton#danger:hover { background-color: #d03e59; }
+QPushButton:disabled, QPushButton#danger:disabled { background-color: #e8e5f0; color: #625d75; border: 1px solid #d6d1e5; }
+QCheckBox { spacing: 10px; }
+QToolTip { background-color: #ffffff; color: #242137; border: 1px solid #d6d1e5; padding: 6px; }
+
+QComboBox::down-arrow { image: url("CHEVRON_PATH"); width: 14px; height: 10px; }
