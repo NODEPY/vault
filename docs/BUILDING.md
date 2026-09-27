@@ -21,7 +21,7 @@ Use JDK 17, Android SDK platform 36 and the included Gradle 8.13 wrapper:
 
 ```sh
 cd android
-./gradlew :app:testDebugUnitTest :app:lintDebug :app:assembleDebug :app:bundleRelease
+sh ./gradlew :app:testDebugUnitTest :app:lintDebug :app:assembleDebug :app:bundleRelease
 cd ..
 python scripts/check_android_interop.py
 ```

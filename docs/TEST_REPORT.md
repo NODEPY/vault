@@ -12,6 +12,7 @@
 | Android lint | **0 errors, 1 warning** | Warning concerns a newer Android Gradle plugin version; pinned toolchain remains intentional |
 | Browser DOM fixture | **10 assertions passed** | Visible field filling, capture, no submission, hidden/transparent fields, cross-origin action rejection |
 | Python ↔ Java interchange | **Passed both directions** | Python fixture opened by JVM tests; Java-produced encrypted file opened by Python |
+| macOS packaged app and native host | **Passed** | App smoke check, native protocol test, extracted archive signature and relocation |
 | Android packages | **Built successfully** | Debug APK and unsigned production AAB |
 
 Environment: macOS Apple Silicon, Python 3.14.7, PySide6 6.11.2, cryptography 50.0.1, JDK 17, Gradle 8.13, Android compile SDK 36, Robolectric SDK 35. All credentials are fictional and vault tests use disposable files. Personal vaults were not used.
@@ -42,7 +43,7 @@ Regression tests cover these changes. Passing tests establish these specific beh
 QT_QPA_PLATFORM=offscreen python -m unittest discover -s tests -v
 node --test extension/tests/*.test.js
 cd android
-./gradlew :app:testDebugUnitTest :app:lintDebug :app:assembleDebug :app:bundleRelease
+sh ./gradlew :app:testDebugUnitTest :app:lintDebug :app:assembleDebug :app:bundleRelease
 cd ..
 python scripts/check_android_interop.py
 ```

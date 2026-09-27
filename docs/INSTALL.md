@@ -66,7 +66,7 @@ Install Android Studio and JDK 17. Open the repository's `android` folder in And
 
 ```sh
 cd android
-./gradlew :app:assembleDebug
+sh ./gradlew :app:assembleDebug
 ```
 
 On Windows use `gradlew.bat :app:assembleDebug`. The APK is at `app/build/outputs/apk/debug/app-debug.apk`.
