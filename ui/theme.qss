@@ -1,12 +1,12 @@
 QWidget { background: @BG@; color: @FG@; font-size: 13px; }
 QLabel { background: transparent; }
-QLabel#title { color: @FG@; font-size: 25px; font-weight: 600; }
+QLabel#title { color: @FG@; font-size: 24px; font-weight: 600; }
 QLabel#subtitle { color: @MUTED@; font-size: 13px; }
 QLabel#hint { color: @MUTED@; font-size: 11px; }
 QLabel#error { color: @ERROR@; font-size: 12px; }
-QLabel#wordmark { font-size: 22px; font-weight: 600; letter-spacing: 1px; }
+QLabel#wordmark { font-size: 23px; font-weight: 600; letter-spacing: -0.5px; }
 QLabel#sectionLabel { color: @MUTED@; font-size: 10px; font-weight: 600; letter-spacing: 1px; }
-QLabel#detailTitle { font-size: 29px; font-weight: 600; }
+QLabel#detailTitle { font-size: 30px; font-weight: 600; }
 QLabel#avatar { background: @SELECTED@; color: @ACCENT@; border-radius: 10px; font-size: 22px; font-weight: 600; }
 QLabel#fieldLabel { color: @MUTED@; font-size: 12px; }
 QFrame#sidebar { background: @SIDE@; border-right: 1px solid @BORDER@; }
@@ -14,12 +14,12 @@ QFrame#sidebar QWidget { background: transparent; }
 QFrame#listPane { background: @BG@; border-right: 1px solid @BORDER@; }
 QFrame#detailPane { background: @PANEL@; }
 QWidget#detailContent, QStackedWidget#detailsStack { background: @PANEL@; }
-QFrame#fieldGroup { background: @FIELD@; border: 1px solid @BORDER@; border-radius: 6px; }
+QFrame#fieldGroup { background: @FIELD@; border: 1px solid @BORDER@; border-radius: 10px; }
 QFrame#fieldGroup QLabel { background: transparent; }
 QFrame#divider { background: @BORDER@; max-height: 1px; border: none; }
 QLineEdit, QListWidget, QComboBox, QSpinBox, QPlainTextEdit {
-    background: @FIELD@; border: 1px solid @BORDER@; border-radius: 5px;
-    padding: 9px 10px; selection-background-color: @SELECTED@; selection-color: @FG@;
+    background: @FIELD@; border: 1px solid @BORDER@; border-radius: 8px;
+    padding: 11px 12px; selection-background-color: @SELECTED@; selection-color: @FG@;
 }
 QLineEdit:focus, QComboBox:focus, QSpinBox:focus { border: 1px solid @ACCENT@; }
 QLineEdit#readField { background: transparent; border: none; padding: 0; font-size: 14px; }
@@ -31,7 +31,7 @@ QComboBox::down-arrow { image: url("CHEVRON_PATH"); width: 14px; height: 10px; }
 QComboBox QAbstractItemView { background: @PANEL@; color: @FG@; selection-background-color: @SELECTED@; padding: 5px; }
 QPushButton {
     background: @BUTTON@; color: @BUTTON_TEXT@; border: 1px solid transparent;
-    border-radius: 5px; padding: 8px 13px; font-weight: 500;
+    border-radius: 8px; padding: 10px 15px; font-weight: 500;
 }
 QPushButton:hover { border-color: @ACCENT@; }
 QPushButton:pressed { background: @SELECTED@; color: @FG@; }
@@ -41,7 +41,7 @@ QPushButton#secondary, QPushButton#iconButton {
 }
 QPushButton#secondary:hover, QPushButton#iconButton:hover { background: @HOVER@; }
 QPushButton#iconButton { padding: 7px; min-width: 18px; }
-QPushButton#nav { background: transparent; color: @MUTED@; text-align: left; padding: 10px 12px; border: 1px solid transparent; }
+QPushButton#nav { background: transparent; color: @MUTED@; text-align: left; padding: 11px 12px; border: 1px solid transparent; }
 QPushButton#nav:hover { background: @HOVER@; color: @FG@; }
 QPushButton#nav:checked { background: @SELECTED@; color: @FG@; }
 QPushButton#danger { background: #a4383c; color: #ffffff; }
@@ -54,5 +54,22 @@ QScrollBar::handle:vertical { background: @BORDER@; border-radius: 3px; min-heig
 QScrollBar::add-line:vertical, QScrollBar::sub-line:vertical { height: 0px; }
 QToolTip { background: @PANEL@; color: @FG@; border: 1px solid @BORDER@; padding: 5px; }
 QSlider::groove:horizontal { height: 3px; background: @BORDER@; border-radius: 1px; }
-QSlider::handle:horizontal { background: @ACCENT@; width: 12px; margin: -5px 0; border-radius: 6px; }
+QSlider::handle:horizontal { background: @ACCENT@; width: 12px; margin: -5px 0; border-radius: 10px; }
 QSlider::sub-page:horizontal { background: @ACCENT@; }
+
+QLabel#countBadge { background: @HOVER@; color: @MUTED@; padding: 4px 9px; border-radius: 9px; font-size: 11px; }
+QLabel#website { color: @MUTED@; font-size: 13px; }
+QLabel#credentialHeading { color: @MUTED@; font-size: 12px; font-weight: 500; padding-top: 14px; }
+QPushButton#quietDanger { background: transparent; color: @MUTED@; border: 1px solid transparent; }
+QPushButton#quietDanger:hover { color: @ERROR@; background: @HOVER@; }
+QPushButton#quietDanger:focus { border-color: @ACCENT@; }
+QFrame#fieldGroup { border-radius: 10px; }
+QFrame#fieldGroup QPushButton#iconButton { background: transparent; border: 1px solid transparent; border-radius: 6px; min-width: 26px; min-height: 24px; }
+QFrame#fieldGroup QPushButton#iconButton:hover { background: @HOVER@; border-color: @BORDER@; }
+QFrame#fieldGroup QPushButton#iconButton:focus { border-color: @ACCENT@; }
+QMenu { background: @PANEL@; border: 1px solid @BORDER@; padding: 6px; }
+QMenu::item { padding: 9px 22px; border-radius: 5px; }
+QMenu::item:selected { background: @SELECTED@; }
+QDialogButtonBox { margin-top: 8px; }
+
+QLineEdit { lineedit-password-character: 8226; }

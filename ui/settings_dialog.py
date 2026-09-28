@@ -15,7 +15,7 @@ class SettingsDialog(QDialog):
         self.onboarding = onboarding
         self.setMinimumWidth(520)
         layout = QVBoxLayout(self)
-        layout.setContentsMargins(28, 28, 28, 28)
+        layout.setContentsMargins(36, 32, 36, 28)
         layout.setSpacing(20)
         self.title = QLabel()
         self.title.setObjectName("title")
@@ -25,6 +25,7 @@ class SettingsDialog(QDialog):
         layout.addWidget(self.title)
         layout.addWidget(self.subtitle)
         form = QFormLayout()
+        form.setRowWrapPolicy(QFormLayout.RowWrapPolicy.WrapAllRows)
         form.setSpacing(16)
         self.language_label, self.theme_label = QLabel(), QLabel()
         self.language_combo = QComboBox()
