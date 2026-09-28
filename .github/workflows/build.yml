@@ -1,0 +1,78 @@
+name: Test and build beta
+on: [push, pull_request, workflow_dispatch]
+permissions:
+  contents: read
+jobs:
+  desktop:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-24.04]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+          cache: pip
+      - name: Linux Qt libraries
+        if: runner.os == 'Linux'
+        run: sudo apt-get update && sudo apt-get install -y libegl1 libopengl0 libxcb-cursor0 libxkbcommon-x11-0
+      - run: python -m pip install -r requirements-build.txt
+      - run: python -m unittest discover -s tests -v
+        env:
+          QT_QPA_PLATFORM: offscreen
+      - run: python scripts/build_desktop.py
+      - name: Packaged app smoke test
+        shell: bash
+        env:
+          QT_QPA_PLATFORM: offscreen
+        run: |
+          if [ "$RUNNER_OS" = "macOS" ]; then dist/Vault.app/Contents/MacOS/Vault --smoke-test;
+          elif [ "$RUNNER_OS" = "Windows" ]; then dist/Vault/Vault.exe --smoke-test;
+          else dist/Vault/Vault --smoke-test; fi
+      - run: python scripts/package_desktop.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Vault-${{ matrix.os }}
+          path: |
+            dist/*.tar.gz
+            dist/*.zip
+  extension:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node --test extension/tests/*.test.js
+      - run: npm install --no-save playwright@1.56.1 && npx playwright install --with-deps chromium
+      - run: node extension/tests/content.cjs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Vault-Chrome
+          path: extension/
+  android:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - uses: gradle/actions/setup-gradle@v4
+      - run: chmod +x android/gradlew
+      - run: cd android && ./gradlew --no-daemon :app:testDebugUnitTest :app:lintDebug :app:assembleDebug :app:bundleRelease
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - run: python -m pip install cryptography==50.0.1
+      - run: python scripts/check_android_interop.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Vault-Android-beta
+          path: |
+            android/app/build/outputs/apk/debug/*.apk
+            android/app/build/outputs/bundle/release/*.aab
+            android/app/build/reports/tests/
