@@ -116,5 +116,7 @@
   "browser_access": "Доступ із Chrome",
   "browser_access_body": "Дозволити розширенню доступ до записів для {origin} до наступного блокування?",
   "browser_save": "Зберегти з Chrome",
-  "browser_save_body": "Зберегти або оновити логін {username} для {origin}?"
+  "browser_save_body": "Зберегти або оновити логін {username} для {origin}?",
+  "credentials": "Дані для входу",
+  "local_entry": "Збережено на цьому пристрої"
 }

@@ -116,5 +116,7 @@
   "browser_access": "Chrome access",
   "browser_access_body": "Allow the extension to access accounts for {origin} until the vault locks?",
   "browser_save": "Save from Chrome",
-  "browser_save_body": "Save or update {username} for {origin}?"
+  "browser_save_body": "Save or update {username} for {origin}?",
+  "credentials": "Login details",
+  "local_entry": "Saved on this device"
 }

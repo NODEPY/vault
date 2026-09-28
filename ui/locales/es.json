@@ -116,5 +116,7 @@
   "browser_access": "Acceso de Chrome",
   "browser_access_body": "¿Permitir a la extensión acceder a las cuentas de {origin} hasta que se bloquee la bóveda?",
   "browser_save": "Guardar desde Chrome",
-  "browser_save_body": "¿Guardar o actualizar {username} para {origin}?"
+  "browser_save_body": "¿Guardar o actualizar {username} para {origin}?",
+  "credentials": "Datos de acceso",
+  "local_entry": "Guardado en este dispositivo"
 }

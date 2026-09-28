@@ -116,5 +116,7 @@
   "browser_access": "Chrome-Zugriff",
   "browser_access_body": "Zugriff der Erweiterung auf Konten für {origin} bis zur nächsten Sperre erlauben?",
   "browser_save": "Aus Chrome speichern",
-  "browser_save_body": "{username} für {origin} speichern oder aktualisieren?"
+  "browser_save_body": "{username} für {origin} speichern oder aktualisieren?",
+  "credentials": "Anmeldedaten",
+  "local_entry": "Auf diesem Gerät gespeichert"
 }

@@ -116,5 +116,7 @@
   "browser_access": "Dostęp Chrome",
   "browser_access_body": "Zezwolić rozszerzeniu na dostęp do kont dla {origin} do zablokowania sejfu?",
   "browser_save": "Zapisz z Chrome",
-  "browser_save_body": "Zapisać lub zaktualizować {username} dla {origin}?"
+  "browser_save_body": "Zapisać lub zaktualizować {username} dla {origin}?",
+  "credentials": "Dane logowania",
+  "local_entry": "Zapisano na tym urządzeniu"
 }
