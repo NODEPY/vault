@@ -51,3 +51,11 @@ python scripts/check_android_interop.py
 For actual Chromium DOM tests, install the pinned Playwright setup described in [BUILDING](BUILDING.md) and run `node extension/tests/content.cjs`. For bundle checks, build/package on the target OS and run the packaged executable with `--smoke-test`.
 
 The repository's [Actions workflow](https://github.com/NODEPY/vault/actions/workflows/build.yml) repeats desktop checks and builds separately on macOS, Windows and Ubuntu, plus Android and Chromium jobs. Consult a specific commit's result rather than assuming the badge proves all platforms are production-ready.
+
+## GitHub Actions verification — 28 September 2026
+
+[Release-commit run](https://github.com/NODEPY/vault/actions/runs/36390511000) at `ad4f29dc6cc3bd4897954be1e83529d1fd7b26af` completed the desktop tests, packaging and packaged-app smoke checks on **Windows, Ubuntu 24.04 and macOS**. The Chrome job passed Node tests and the actual Chromium/Playwright form fixture. Android passed JVM/Robolectric tests, lint, APK/AAB builds and Java-to-Python interoperability. Downloadable artifacts are attached to the run. These are automated runner checks; the real-device and interactive limitations above still apply.
+
+The first run revealed an obsolete default Android SDK package (`tools`) in the setup action. The workflow now explicitly installs platform-tools, platform 36 and build-tools 36.0.0; the corrected Android build passed.
+
+All 197 expected source/documentation files were confirmed present in the published repository. Release asset SHA-256 digests match the local checksum file. README screenshots were checked after publication and loaded successfully.
