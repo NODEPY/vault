@@ -121,5 +121,7 @@
   "fill_confirm": "¿Rellenar esta cuenta y recordar su asociación con esta aplicación?",
   "enable_autofill": "Activar autocompletado de Android",
   "android_autofill_hint": "El autocompletado admite formularios de acceso en aplicaciones. Requiere desbloqueo y confirmación. Para sitios web, usa la extensión de Chrome en el ordenador.",
-  "android_transfer": "Transfiere copias cifradas entre dispositivos con la contraseña maestra de la copia. No hay sincronización en la nube."
+  "android_transfer": "Transfiere copias cifradas entre dispositivos con la contraseña maestra de la copia. No hay sincronización en la nube.",
+  "credentials": "Datos de acceso",
+  "local_entry": "Guardado en este dispositivo"
 }

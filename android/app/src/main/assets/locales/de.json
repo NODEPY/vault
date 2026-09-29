@@ -121,5 +121,7 @@
   "fill_confirm": "Dieses Konto ausfüllen und die Zuordnung zur App speichern?",
   "enable_autofill": "Android-Autofill aktivieren",
   "android_autofill_hint": "Autofill unterstützt Anmeldeformulare in Apps. Entsperren und Bestätigen sind erforderlich. Für Websites gibt es die Chrome-Erweiterung am Computer.",
-  "android_transfer": "Verschlüsselte Sicherungen mit ihrem Master-Passwort zwischen Geräten übertragen. Keine Cloud-Synchronisierung."
+  "android_transfer": "Verschlüsselte Sicherungen mit ihrem Master-Passwort zwischen Geräten übertragen. Keine Cloud-Synchronisierung.",
+  "credentials": "Anmeldedaten",
+  "local_entry": "Auf diesem Gerät gespeichert"
 }

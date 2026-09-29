@@ -121,5 +121,7 @@
   "fill_confirm": "Fill this account and remember its association with this app?",
   "enable_autofill": "Enable Android autofill",
   "android_autofill_hint": "Autofill supports native app login forms. Each fill requires unlocking and confirmation. Website autofill is available in the desktop Chrome extension.",
-  "android_transfer": "Move an encrypted backup between devices using the same backup master password. There is no cloud sync."
+  "android_transfer": "Move an encrypted backup between devices using the same backup master password. There is no cloud sync.",
+  "credentials": "Login details",
+  "local_entry": "Saved on this device"
 }

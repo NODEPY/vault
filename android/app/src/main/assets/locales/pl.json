@@ -121,5 +121,7 @@
   "fill_confirm": "Wypełnić to konto i zapamiętać powiązanie z tą aplikacją?",
   "enable_autofill": "Włącz autouzupełnianie Android",
   "android_autofill_hint": "Autouzupełnianie obsługuje formularze logowania w aplikacjach. Wymaga odblokowania i potwierdzenia. Strony internetowe obsługuje rozszerzenie Chrome na komputerze.",
-  "android_transfer": "Przenoś zaszyfrowane kopie między urządzeniami za pomocą hasła głównego kopii. Brak synchronizacji w chmurze."
+  "android_transfer": "Przenoś zaszyfrowane kopie między urządzeniami za pomocą hasła głównego kopii. Brak synchronizacji w chmurze.",
+  "credentials": "Dane logowania",
+  "local_entry": "Zapisano na tym urządzeniu"
 }
