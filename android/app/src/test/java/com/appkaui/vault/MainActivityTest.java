@@ -63,6 +63,13 @@ public class MainActivityTest {
             View content=root(controller.get());content.measure(View.MeasureSpec.makeMeasureSpec(800,View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(1680,View.MeasureSpec.EXACTLY));content.layout(0,0,800,1680);
             android.graphics.Bitmap bitmap=android.graphics.Bitmap.createBitmap(800,1680,android.graphics.Bitmap.Config.ARGB_8888);content.draw(new android.graphics.Canvas(bitmap));
             java.io.File destination=new java.io.File("build/preview-android.png");destination.getParentFile().mkdirs();try(java.io.OutputStream out=new java.io.FileOutputStream(destination)){assertTrue(bitmap.compress(android.graphics.Bitmap.CompressFormat.PNG,100,out));}
+            TextView account=views(content,TextView.class).stream().filter(v->"GitHub".equals(v.getText().toString())).findFirst().orElseThrow();
+            ((View)account.getParent().getParent()).performClick();
+            assertTrue(text(controller.get(),"Copy password"));assertFalse(text(controller.get(),"fictional-password"));
+            content=root(controller.get());content.measure(View.MeasureSpec.makeMeasureSpec(800,View.MeasureSpec.EXACTLY),View.MeasureSpec.makeMeasureSpec(1680,View.MeasureSpec.EXACTLY));content.layout(0,0,800,1680);
+            bitmap=android.graphics.Bitmap.createBitmap(800,1680,android.graphics.Bitmap.Config.ARGB_8888);content.draw(new android.graphics.Canvas(bitmap));
+            try(java.io.OutputStream out=new java.io.FileOutputStream("build/preview-android-detail.png")){assertTrue(bitmap.compress(android.graphics.Bitmap.CompressFormat.PNG,100,out));}
+
         }
     }
 
