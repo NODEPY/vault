@@ -6,6 +6,7 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.RippleDrawable;
 import android.net.Uri;
 import android.os.*;
 import android.provider.Settings;
@@ -30,6 +31,7 @@ public class MainActivity extends Activity {
     private JSONObject strings;
     private LinearLayout root, body;
     private int bg, panel, ink, muted, accent;
+    private boolean lightTheme;
     private final ExecutorService worker=Executors.newSingleThreadExecutor();
     private boolean active, external;
     private int generation;
@@ -63,7 +65,8 @@ public class MainActivity extends Activity {
     private void loadAppearance(){
         try(InputStream in=getAssets().open("locales/"+prefs.getString("language","en")+".json")){strings=new JSONObject(new String(VaultStore.read(in),StandardCharsets.UTF_8));}catch(Exception e){strings=new JSONObject();}
         String theme=prefs.getString("theme","dark");
-        String[] c=switch(theme){case "light"->new String[]{"#F4F4F0","#FFFFFF","#1D2623","#66736C","#326B50"};case "sand"->new String[]{"#EFE7D9","#FBF7EE","#352E24","#796A56","#79603D"};case "forest"->new String[]{"#101D18","#192B22","#E4EFE6","#91AA99","#AED4A7"};case "midnight"->new String[]{"#121827","#1D263A","#E7ECF8","#9AA8C5","#B0C3E8"};default->new String[]{"#151918","#222826","#EFF3ED","#A5B0A9","#B8D3A5"};};
+        lightTheme=theme.equals("light")||theme.equals("sand");
+        String[] c=switch(theme){case "light"->new String[]{"#F5F6F3","#FFFFFF","#242927","#636C66","#315F46"};case "sand"->new String[]{"#EFE7D9","#FBF7EE","#352E24","#796A56","#79603D"};case "forest"->new String[]{"#101D18","#192B22","#E4EFE6","#91AA99","#AED4A7"};case "midnight"->new String[]{"#121827","#1D263A","#E7ECF8","#9AA8C5","#B0C3E8"};default->new String[]{"#202325","#272B2D","#EEEFED","#A2A7A8","#A9C8B6"};};
         bg=Color.parseColor(c[0]);panel=Color.parseColor(c[1]);ink=Color.parseColor(c[2]);muted=Color.parseColor(c[3]);accent=Color.parseColor(c[4]);
     }
     private GradientDrawable surface(int color,int radius){GradientDrawable d=new GradientDrawable();d.setColor(color);d.setCornerRadius(dp(radius));return d;}
@@ -72,29 +75,41 @@ public class MainActivity extends Activity {
         root=column();root.setBackgroundColor(bg);root.setPadding(dp(24),dp(20),dp(24),dp(12));
         root.setOnApplyWindowInsetsListener((v,insets)->{int top=insets.getSystemWindowInsetTop(),bottom=insets.getSystemWindowInsetBottom();v.setPadding(dp(24),top+dp(16),dp(24),bottom+dp(12));return insets;});
         setContentView(root);root.requestApplyInsets();
-        TextView brand=text("V /  VAULT",14,true);brand.setTextColor(accent);
+        TextView brand=text("Vault",22,true);brand.setTextColor(ink);
         LinearLayout bar=new LinearLayout(this);bar.setGravity(Gravity.CENTER_VERTICAL);bar.addView(brand,new LinearLayout.LayoutParams(0,-2,1));
         if(app.store.unlocked()&&fillRequest==null){Button more=new Button(this);more.setText("···");more.setTextSize(24);more.setTextColor(ink);more.setBackgroundColor(Color.TRANSPARENT);more.setContentDescription(t("tools"));bar.addView(more,new LinearLayout.LayoutParams(dp(48),dp(48)));
             more.setOnClickListener(v->{PopupMenu menu=new PopupMenu(this,more);menu.getMenu().add(t("tools")).setOnMenuItemClickListener(item->{showTools();return true;});menu.getMenu().add(t("settings")).setOnMenuItemClickListener(item->{showSettings(false);return true;});menu.getMenu().add(t("lock")).setOnMenuItemClickListener(item->{app.lock();showUnlock();return true;});menu.show();});}
         root.addView(bar);
-        TextView title=text(subtitle,30,true);LinearLayout.LayoutParams tp=new LinearLayout.LayoutParams(-1,-2);tp.setMargins(0,dp(24),0,dp(18));root.addView(title,tp);
+        TextView title=text(subtitle,28,true);LinearLayout.LayoutParams tp=new LinearLayout.LayoutParams(-1,-2);tp.setMargins(0,dp(18),0,dp(16));root.addView(title,tp);
         ScrollView scroll=new ScrollView(this);scroll.setFillViewport(true);root.addView(scroll,new LinearLayout.LayoutParams(-1,0,1));body=column();scroll.addView(body);
     }
-    private TextView text(String value,int size,boolean bold){TextView v=new TextView(this);v.setText(value);v.setTextSize(size);v.setTextColor(ink);v.setTypeface(Typeface.create("sans-serif",bold?Typeface.BOLD:Typeface.NORMAL));v.setPadding(0,dp(5),0,dp(5));return v;}
+    private TextView text(String value,int size,boolean bold){TextView v=new TextView(this);v.setText(value);v.setTextSize(size);v.setTextColor(ink);v.setTypeface(Typeface.create("sans-serif",bold?Typeface.BOLD:Typeface.NORMAL));v.setPadding(0,dp(3),0,dp(3));return v;}
     private void hint(LinearLayout parent,String value){TextView v=text(value,14,false);v.setTextColor(muted);parent.addView(v);}
     private EditText input(LinearLayout parent,String label,String value,boolean secret){
-        if(!label.isEmpty())hint(parent,label);EditText v=new EditText(this);v.setSingleLine(true);v.setTextColor(ink);v.setHintTextColor(muted);v.setTextSize(16);v.setPadding(dp(14),dp(12),dp(14),dp(12));v.setBackground(surface(panel,8));
+        if(!label.isEmpty())hint(parent,label);EditText v=new EditText(this);v.setSingleLine(true);v.setTextColor(ink);v.setHintTextColor(muted);v.setTextSize(16);v.setPadding(dp(14),dp(12),dp(14),dp(12));v.setBackground(surface(panel,10));v.setMinHeight(dp(52));
         v.setInputType(secret?InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_VARIATION_PASSWORD:InputType.TYPE_CLASS_TEXT|InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         v.setImportantForAutofill(View.IMPORTANT_FOR_AUTOFILL_NO);v.setSaveEnabled(false);v.setText(value);
         LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,-2);lp.setMargins(0,0,0,dp(12));parent.addView(v,lp);return v;
     }
-    private Button button(LinearLayout parent,String label,Runnable action){Button b=new Button(this);b.setText(label);b.setAllCaps(false);b.setTextColor(ink);b.setBackgroundTintList(ColorStateList.valueOf(panel));b.setMinHeight(dp(48));LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,-2);lp.setMargins(0,dp(5),0,dp(5));parent.addView(b,lp);b.setOnClickListener(v->action.run());return b;}
+    private Button button(LinearLayout parent,String label,Runnable action){
+        Button b=new Button(this);b.setText(label);b.setAllCaps(false);b.setTextSize(14);b.setTypeface(Typeface.create("sans-serif-medium",Typeface.NORMAL));b.setTextColor(ink);
+        b.setBackground(new RippleDrawable(ColorStateList.valueOf(0x227F998B),surface(panel,10),null));b.setMinHeight(dp(48));b.setMinimumHeight(dp(48));b.setPadding(dp(14),dp(10),dp(14),dp(10));
+        boolean horizontal=parent.getOrientation()==LinearLayout.HORIZONTAL;
+        LinearLayout.LayoutParams lp=horizontal?new LinearLayout.LayoutParams(0,-2,1):new LinearLayout.LayoutParams(-1,-2);
+        lp.setMargins(0,dp(6),horizontal?dp(6):0,dp(6));parent.addView(b,lp);b.setOnClickListener(v->action.run());return b;
+    }
+    private void primary(Button button){button.setBackground(new RippleDrawable(ColorStateList.valueOf(0x337F998B),surface(accent,10),null));button.setTextColor(bg);}
+    private LinearLayout actionRow(LinearLayout parent){LinearLayout row=new LinearLayout(this);row.setOrientation(LinearLayout.HORIZONTAL);parent.addView(row);return row;}
+    private LinearLayout fieldSection(String label){
+        LinearLayout section=column();section.setPadding(dp(16),dp(12),dp(16),dp(12));section.setBackground(surface(panel,12));
+        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,-2);lp.setMargins(0,dp(6),0,dp(8));body.addView(section,lp);hint(section,label);return section;
+    }
     private void error(String key){new AlertDialog.Builder(this).setTitle(t("error")).setMessage(t(key)).setPositiveButton("OK",null).show();}
     private void showUnlock(){
         if(!active)return; if(currentDialog!=null){currentDialog.dismiss();currentDialog=null;}
         boolean creating=!app.store.exists();screen(t(creating?"create_title":"unlock_title"));hint(body,t(creating?"create_hint":"unlock_hint"));
         EditText pw=input(body,t("master"),"",true);EditText repeat=creating?input(body,t("repeat"),"",true):null;
-        Button unlock=button(body,t(creating?"create":"unlock"),()->{});
+        Button unlock=button(body,t(creating?"create":"unlock"),()->{});primary(unlock);
         unlock.setOnClickListener(v->{
             String password=pw.getText().toString();
             if(password.isEmpty()){error("enter_master");return;}
@@ -115,34 +130,44 @@ public class MainActivity extends Activity {
         if(fillRequest!=null&&AutofillRequests.get(requestToken)==null){finish();return;}
         screen(t("passwords"));
         if(fillRequest!=null){hint(body,t("fill_for")+"\n"+fillRequest.label+"\n"+fillRequest.pkg);}
-        EditText search=input(body,"","",false);search.setHint(t("search"));LinearLayout list=column();body.addView(list);
+        EditText search=input(body,"","",false);search.setHint(t("search"));
+        TextView count=text("",12,false);count.setTextColor(muted);count.setPadding(0,dp(6),0,dp(12));body.addView(count);
+        LinearLayout list=column();body.addView(list);
         Runnable render=()->{list.removeAllViews();try{
             JSONArray entries=app.store.entries();ArrayList<JSONObject> sorted=new ArrayList<>();for(int i=0;i<entries.length();i++)sorted.add(entries.getJSONObject(i));sorted.sort(Comparator.comparing(o->o.optString("title").toLowerCase(Locale.ROOT)));
             String query=search.getText().toString().toLowerCase(Locale.ROOT);int found=0;
             for(JSONObject entry:sorted){if(!(entry.optString("title")+" "+entry.optString("username")).toLowerCase(Locale.ROOT).contains(query))continue;
                 if(fillRequest!=null&&!entry.optString("app_package").isEmpty()&&(!entry.optString("app_package").equals(fillRequest.pkg)||!entry.optString("app_signature").equals(fillRequest.signature)))continue;
                 found++;entryRow(list,entry,()->{if(fillRequest!=null)confirmFill(entry);else showEntry(entry);});}
+            count.setText(t("entry_total").replace("{count}",String.valueOf(found)));
             if(found==0)hint(list,t(entries.length()==0?"empty":"no_results"));
         }catch(Exception e){showUnlock();}};
         search.addTextChangedListener(new TextWatcher(){public void beforeTextChanged(CharSequence s,int st,int c,int a){}public void onTextChanged(CharSequence s,int st,int b,int c){render.run();}public void afterTextChanged(Editable e){}});render.run();
-        if(fillRequest==null){Button add=button(root,t("add"),()->editEntry(null));add.setBackgroundTintList(ColorStateList.valueOf(accent));add.setTextColor(bg);}
+        if(fillRequest==null){Button add=button(root,t("add"),()->editEntry(null));primary(add);}
         else button(body,t("lock"),()->{app.lock();showUnlock();});
     }
     private void entryRow(LinearLayout parent,JSONObject entry,Runnable action){
-        LinearLayout row=new LinearLayout(this);row.setGravity(Gravity.CENTER_VERTICAL);row.setPadding(dp(14),dp(14),dp(14),dp(14));row.setBackground(surface(panel,10));
-        TextView avatar=text(entry.optString("title").substring(0,Math.min(2,entry.optString("title").length())).toUpperCase(Locale.ROOT),16,true);avatar.setGravity(Gravity.CENTER);avatar.setTextColor(accent);avatar.setBackground(surface(bg,8));row.addView(avatar,new LinearLayout.LayoutParams(dp(44),dp(44)));
+        LinearLayout row=new LinearLayout(this);row.setGravity(Gravity.CENTER_VERTICAL);row.setPadding(dp(14),dp(15),dp(14),dp(15));row.setBackground(new RippleDrawable(ColorStateList.valueOf(0x227F998B),surface(panel,12),null));
+        TextView avatar=text(entry.optString("title").substring(0,Math.min(1,entry.optString("title").length())).toUpperCase(Locale.ROOT),16,true);avatar.setGravity(Gravity.CENTER);avatar.setTextColor(accent);avatar.setBackground(surface(bg,8));row.addView(avatar,new LinearLayout.LayoutParams(dp(44),dp(44)));
         LinearLayout names=column();LinearLayout.LayoutParams np=new LinearLayout.LayoutParams(0,-2,1);np.setMargins(dp(14),0,dp(10),0);row.addView(names,np);
-        TextView title=text(entry.optString("title"),17,true);title.setSingleLine(true);title.setEllipsize(TextUtils.TruncateAt.END);names.addView(title);
+        TextView title=text(entry.optString("title"),16,true);title.setSingleLine(true);title.setEllipsize(TextUtils.TruncateAt.END);names.addView(title);
         TextView username=text(entry.optString("username"),13,false);username.setTextColor(muted);username.setSingleLine(true);username.setEllipsize(TextUtils.TruncateAt.END);names.addView(username);
         TextView arrow=text("›",24,false);arrow.setTextColor(muted);row.addView(arrow);
         LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(-1,-2);lp.setMargins(0,dp(5),0,dp(5));parent.addView(row,lp);row.setClickable(true);row.setFocusable(true);row.setContentDescription(entry.optString("title")+", "+entry.optString("username"));row.setOnClickListener(v->action.run());
     }
     private void showEntry(JSONObject entry){
-        if(!app.store.unlocked()){showUnlock();return;}screen(entry.optString("title"));hint(body,t("username"));body.addView(text(entry.optString("username"),18,false));hint(body,entry.optString("url"));
-        TextView password=text("••••••••••••",24,false);body.addView(password);
-        button(body,t("reveal"),()->{password.setText(entry.optString("password"));app.handler.postDelayed(()->password.setText("••••••••••••"),10000);});
-        button(body,t("copy_username"),()->copy(entry.optString("username")));button(body,t("copy_password"),()->copy(entry.optString("password")));
-        button(body,t("edit"),()->editEntry(entry));button(body,t("delete"),()->confirm(t("delete_entry_body"),()->{try{app.store.delete(entry.optString("id"));showLibrary();}catch(Exception e){error("save_failed");}}));button(body,t("close"),this::showLibrary);
+        if(!app.store.unlocked()){showUnlock();return;}screen(entry.optString("title"));
+        hint(body,entry.optString("url").isEmpty()?t("local_entry"):entry.optString("url"));
+        LinearLayout username=fieldSection(t("username"));TextView user=text(entry.optString("username"),17,false);user.setTextIsSelectable(true);username.addView(user);
+        button(username,t("copy_username"),()->copy(entry.optString("username")));
+        LinearLayout secret=fieldSection(t("password"));TextView password=text("••••••••••••",20,false);password.setTypeface(Typeface.MONOSPACE);secret.addView(password);
+        LinearLayout access=actionRow(secret);
+        button(access,t("reveal"),()->{password.setText(entry.optString("password"));app.handler.postDelayed(()->password.setText("••••••••••••"),10000);});
+        button(access,t("copy_password"),()->copy(entry.optString("password")));
+        hint(body,t("security_note"));
+        LinearLayout actions=actionRow(body);button(actions,t("edit"),()->editEntry(entry));
+        Button delete=button(actions,t("delete"),()->confirm(t("delete_entry_body"),()->{try{app.store.delete(entry.optString("id"));showLibrary();}catch(Exception e){error("save_failed");}}));delete.setTextColor(lightTheme?Color.parseColor("#A43535"):Color.parseColor("#EDA7A2"));
+        button(root,t("close"),this::showLibrary);
     }
     private void copy(String value){
         android.content.ClipboardManager manager=(android.content.ClipboardManager)getSystemService(CLIPBOARD_SERVICE);String token="Vault-"+UUID.randomUUID();ClipData clip=ClipData.newPlainText(token,value);
@@ -154,10 +179,10 @@ public class MainActivity extends Activity {
         if(!app.store.unlocked()){showUnlock();return;}screen(t(original==null?"new_entry":"edit_entry"));
         EditText title=input(body,t("service"),original==null?"":original.optString("title"),false),user=input(body,t("username"),original==null?"":original.optString("username"),false),url=input(body,t("website"),original==null?"":original.optString("url"),false),password=input(body,t("password"),original==null?"":original.optString("password"),true);
         button(body,t("generator"),()->password.setText(randomPassword()));
-        button(body,t("save"),()->{if(title.getText().toString().trim().isEmpty()){error("enter_title");return;}if(password.length()==0){error("enter_password");return;}
+        Button save=button(body,t("save"),()->{if(title.getText().toString().trim().isEmpty()){error("enter_title");return;}if(password.length()==0){error("enter_password");return;}
             String site;try{site=origin(url.getText().toString());}catch(Exception e){error("invalid_website");return;}
             try{JSONObject entry=original==null?new JSONObject():new JSONObject(original.toString());if(original==null)entry.put("id",UUID.randomUUID().toString().replace("-",""));entry.put("title",title.getText().toString().trim()).put("username",user.getText().toString()).put("password",password.getText().toString()).put("url",site);app.store.save(entry);password.setText("");showLibrary();}catch(Exception e){error("save_failed");}
-        });button(body,t("cancel"),this::showLibrary);
+        });primary(save);button(body,t("cancel"),this::showLibrary);
     }
     private String randomPassword(){String chars="ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%&*+-_";SecureRandom rng=new SecureRandom();StringBuilder value=new StringBuilder();for(int i=0;i<24;i++)value.append(chars.charAt(rng.nextInt(chars.length())));return value.toString();}
     private void confirm(String message,Runnable action){currentDialog=new AlertDialog.Builder(this).setMessage(message).setNegativeButton(t("cancel"),null).setPositiveButton(t("continue"),(d,w)->{if(app.store.unlocked())action.run();}).create();currentDialog.show();}
