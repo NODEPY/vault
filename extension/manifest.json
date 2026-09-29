@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Vault Companion",
-  "version": "0.1.0.2",
+  "version": "0.1.0.3",
   "description": "Save and fill website logins using your locally encrypted Vault desktop app.",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAozvuX2soPatgfEFYus9MgUkn+KELc3a3xad9HYJE5ejNUl0q9NJP1LuFs3OhO5TB5f182Zy4yyogXO6lIBZqWWc2DmYQ9n7JPpEKLlvxQzRDgHlBpiKU/+H3mGOORJZDmC9gVYx5vcC63XgiU7oTV4nvQaiYYyZTJhVLfmoDCAAA3LfAUBLak2rcv8CSruvhEGKaNipZnYmV/ZJyYgvuO4PXZTQSPfrCa653ZSAo+lFYsFXwivx8dcp2LgQ+YN9JpxeA3UVwXZ/0Opy0MFB9tET02zV8hkJTi/vvRAAqjY9wOuVELe1Kamna3AghvaJF2bO4R4Qas4iWFlgydp6wswIDAQAB",
   "permissions": [
@@ -29,5 +29,5 @@
   "content_security_policy": {
     "extension_pages": "script-src 'self'; object-src 'none'"
   },
-  "version_name": "0.1.0-beta.2"
+  "version_name": "0.1.0-beta.3"
 }

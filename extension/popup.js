@@ -8,7 +8,9 @@ async function call(action,extra={}) {
 function message(text,error=false){$('message').textContent=text;$('message').classList.toggle('error',error);}
 async function state(){
   const value=await call('state');origin=value.origin;
-  $('site').textContent=origin;
+  $('site').textContent=new URL(origin).host;
+  $('site').title=origin;
+  $('status').dataset.state=value.connectionError?'disconnected':value.locked?'locked':'unlocked';
   $('status').textContent=value.connectionError?'Not connected':value.locked?'Locked':'Unlocked';
   $('enable').hidden=value.enabled;$('accounts').hidden=!value.enabled;
   $('pending').hidden=!value.pending;
@@ -19,14 +21,14 @@ async function state(){
   return value;
 }
 async function list(){
-  const reply=await call('list');$('entries').replaceChildren();
-  if(!reply.entries.length){const p=document.createElement('p');p.textContent='No accounts saved for this website.';$('entries').append(p);}
+  const reply=await call('list');$('entries').replaceChildren();$('account-count').textContent=String(reply.entries.length);
+  if(!reply.entries.length){const p=document.createElement('p');p.className='empty';p.textContent='No accounts saved for this website.';$('entries').append(p);}
   for(const entry of reply.entries){
     const row=document.createElement('div');row.className='entry';const text=document.createElement('div');text.className='text';
     const title=document.createElement('strong');title.textContent=entry.title;const user=document.createElement('small');user.textContent=entry.username;
     text.append(title,user);const button=document.createElement('button');button.textContent='Fill';
     button.onclick=()=>run(button,async()=>{await call('fill',{id:entry.id});message('Filled. Review the form and sign in when ready.');});
-    row.append(text,button);$('entries').append(row);
+    const avatar=document.createElement('span');avatar.className='avatar';avatar.setAttribute('aria-hidden','true');avatar.textContent=entry.title.slice(0,1).toUpperCase();button.setAttribute('aria-label','Fill '+entry.title);row.append(avatar,text,button);$('entries').append(row);
   }
 }
 async function run(button,fn){button.disabled=true;try{await fn();}catch(error){message(error.message,true);}finally{button.disabled=false;}}
